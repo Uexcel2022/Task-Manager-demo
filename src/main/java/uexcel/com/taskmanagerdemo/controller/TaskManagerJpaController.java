@@ -3,14 +3,14 @@ package uexcel.com.taskmanagerdemo.controller;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import uexcel.com.myfirstwebapp.service.JpaTaskManagerService;
-import uexcel.com.myfirstwebapp.service.TaskManagerService;
-import uexcel.com.myfirstwebapp.task.TaskManager;
+import uexcel.com.taskmanagerdemo.service.JpaTaskManagerService;
+import uexcel.com.taskmanagerdemo.service.TaskManagerService;
+import uexcel.com.taskmanagerdemo.task.TaskManager;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -52,7 +52,7 @@ public class TaskManagerJpaController {
     }
 
     @PostMapping("update-task")
-    public String taskUpdate(@Valid@ModelAttribute("task") TaskManager task,
+    public String taskUpdate(@Valid @ModelAttribute("task") TaskManager task,
                               BindingResult bindingResult,ModelMap modelMap){
         task.setUsername(logInUsername.get());
         String msg = jpaTaskManagerService.saveTask(task);

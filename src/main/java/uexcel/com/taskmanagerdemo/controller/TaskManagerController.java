@@ -2,12 +2,12 @@ package uexcel.com.taskmanagerdemo.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.context.SecurityContextHolder;
+//import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import uexcel.com.myfirstwebapp.service.TaskManagerService;
-import uexcel.com.myfirstwebapp.task.TaskDataValidator;
-import uexcel.com.myfirstwebapp.task.TaskManager;
+import uexcel.com.taskmanagerdemo.service.TaskManagerService;
+import uexcel.com.taskmanagerdemo.task.TaskDataValidator;
+import uexcel.com.taskmanagerdemo.task.TaskManager;
 
 import java.time.LocalDate;
 import java.util.Optional;
