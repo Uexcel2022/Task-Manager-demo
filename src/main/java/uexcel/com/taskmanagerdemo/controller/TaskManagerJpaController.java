@@ -10,7 +10,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import uexcel.com.taskmanagerdemo.service.JpaTaskManagerService;
-import uexcel.com.taskmanagerdemo.service.TaskManagerService;
 import uexcel.com.taskmanagerdemo.task.TaskManager;
 
 import java.time.LocalDate;
