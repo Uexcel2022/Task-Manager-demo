@@ -24,12 +24,12 @@ public class TaskManagerJpaController {
     private static final Logger log = LoggerFactory.getLogger(TaskManagerJpaController.class);
     private  final JpaTaskManagerService jpaTaskManagerService;
 
-    public TaskManagerJpaController(JpaTaskManagerService jpaTaskManagerService, TaskManagerService taskManagerService) {
+    public TaskManagerJpaController(JpaTaskManagerService jpaTaskManagerService) {
         this.jpaTaskManagerService = jpaTaskManagerService;
     }
 
     @GetMapping("task-list")
-    public String showTaskPage(ModelMap modelMap, @SessionAttribute(required = false) String username){
+    public String showTaskPage(ModelMap modelMap){
         modelMap.put("tasks", jpaTaskManagerService.findByUserName(logInUsername.get()));
         return "viewTask";
     }
@@ -75,9 +75,8 @@ public class TaskManagerJpaController {
     }
 
     @PostMapping("add-task")
-    public String addTask(@Valid @ModelAttribute("task") TaskManager task,
+    public String showAddTaskPage(@Valid @ModelAttribute("task") TaskManager task,
                           BindingResult bindingResult, ModelMap modelMap){
-
         task.setUsername(logInUsername.get());
         String msg = jpaTaskManagerService.saveTask(task);
         if (!msg.equals("success")) {

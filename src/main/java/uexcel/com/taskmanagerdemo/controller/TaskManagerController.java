@@ -1,5 +1,6 @@
 package uexcel.com.taskmanagerdemo.controller;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 //import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,21 +29,19 @@ public class TaskManagerController {
     }
 
     @GetMapping("task-list")
-    public String showTaskPage(ModelMap modelMap, @SessionAttribute(required = false) String username){
+    public String showTaskPage(ModelMap modelMap){
 
         modelMap.put("tasks", taskManagerService.findByUserName(getLogInUsername.get()));
         return "viewTask";
     }
     @PostMapping("delete-task")
-    public String deleteTask(@RequestParam int taskId,
-                             @SessionAttribute(required = false) String username){
+    public String deleteTask(@RequestParam int taskId){
         taskManagerService.removeTaskById(taskId);
         return "redirect:/task-list";
     }
 
     @PostMapping("update-page")
-    public String showUpdatePage(@RequestParam int taskId, ModelMap modelMap,
-                             @SessionAttribute(required = false) String username ){
+    public String showUpdatePage(@RequestParam int taskId, ModelMap modelMap){
      Optional<TaskManager> task = taskManagerService.findTaskById(taskId);
      if(task.isPresent()) {
          modelMap.put("task", task.get());
@@ -53,8 +52,7 @@ public class TaskManagerController {
     }
 
     @PostMapping("update-task")
-    public String taskUpdate(@ModelAttribute("task") TaskManager task,ModelMap modelMap,
-                             @SessionAttribute(required = false) String username ){
+    public String taskUpdate(@ModelAttribute("task") TaskManager task,ModelMap modelMap){
         String msg = taskDataValidator.validate(task);
         if (!msg.equals("success")) {
             String[] errorMessage = msg.split(":");
@@ -67,8 +65,7 @@ public class TaskManagerController {
     }
 
     @GetMapping("add-task")
-    public String showAddTaskPage(@ModelAttribute("task") TaskManager task, ModelMap modelMap,
-                                  @SessionAttribute(required = false) String username ){
+    public String showAddTaskPage(@ModelAttribute("task") TaskManager task, ModelMap modelMap){
         task.setStarts(LocalDate.now());
         task.setEnds(LocalDate.now().plusDays(7));
         modelMap.put("task", task);
@@ -76,8 +73,7 @@ public class TaskManagerController {
     }
 
     @PostMapping("add-task")
-    public String addTask(@ModelAttribute("task") TaskManager task, ModelMap modelMap,
-                          @SessionAttribute(required = false) String username ){
+    public String addNewTask(@ModelAttribute("task") TaskManager task, ModelMap modelMap){
 
         String msg = taskDataValidator.validate(task);
         if (!msg.equals("success")) {
@@ -93,9 +89,7 @@ public class TaskManagerController {
     }
 
     @PostMapping("task-done")
-    public String taskDone(@RequestParam int taskId,
-                           @SessionAttribute(required = false) String username){
-
+    public String taskDone(@RequestParam() int taskId){
         taskManagerService.taskDone(taskId);
         return "redirect:/task-list";
     }
