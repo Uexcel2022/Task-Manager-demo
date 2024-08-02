@@ -1,0 +1,39 @@
+body{
+    height: 100vh;
+}
+
+
+form div{
+    display: flex;
+    flex-flow: column ;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+
+.cls{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 13px;
+    margin-top: 13px;
+}
+
+.for-heading{
+    margin-top: -10px;
+    margin-bottom: 15px;
+}
+
+.rd{
+    font-weight: bold;
+    line-height: 0;
+}
+
+.errorMessage{
+    color: #808007;
+}
